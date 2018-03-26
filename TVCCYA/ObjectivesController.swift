@@ -115,6 +115,9 @@ class ObjectivesController: UITableViewController, CreateObjectiveControllerDele
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleObjective))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sub cunt", style: .plain
+            , target: self, action: #selector(handleSubscribe))
+        
         tableView.backgroundColor = UIColor.mainLightBlue
         tableView.tableFooterView = UIView()
         tableView.separatorColor = .white
@@ -124,6 +127,11 @@ class ObjectivesController: UITableViewController, CreateObjectiveControllerDele
 //        view.addSubview(addObjButton)
 //        addObjButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: nil, paddingTop: 74, paddingLeft: 0, paddingBottom: 12, paddingRight: 0, width: 50, height: 50)
 //        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    @objc func handleSubscribe() {
+        let subscribeController = SubcscribeController()
+        navigationController?.pushViewController(subscribeController, animated: true)
     }
     
     @objc func handleObjective() {
@@ -136,7 +144,6 @@ class ObjectivesController: UITableViewController, CreateObjectiveControllerDele
 //        present(navController, animated: true, completion: nil)
         
         navigationController?.pushViewController(createObjectiveController, animated: true)
-        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

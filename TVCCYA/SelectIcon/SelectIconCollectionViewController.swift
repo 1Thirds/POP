@@ -22,6 +22,8 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
         
         collectionView?.backgroundColor = UIColor.mainLightBlue
         
+        collectionView?.alwaysBounceVertical = true
+        
         navigationItem.title = "Select Icon"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))

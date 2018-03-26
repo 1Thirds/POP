@@ -93,6 +93,25 @@ extension SelectIconCollectionViewController {
         coffee.name = "coffee"
         coffee.image = "coffee"
         
-        icons = [workout, book, laptop, gaming, tv, groceries, garden, cooking, writing, heart, cash, build, dog, shopping, movie, camp, drink]
+        let haircut = SelectIconCell()
+        haircut.name = "haircut"
+        haircut.image = "haircut"
+        
+        let clean = SelectIconCell()
+        clean.name = "clean"
+        clean.image = "clean"
+        
+        let laundry = SelectIconCell()
+        laundry.name = "laundry"
+        laundry.image = "laundry"
+        
+        let bed = SelectIconCell()
+        bed.name = "bed"
+        bed.image = "bed"
+        
+        icons = [workout, book, laptop, gaming, tv, groceries,
+                 garden, cooking, writing, heart, cash, build,
+                 dog, shopping, health, movie, camp, drink, coffee,
+                 haircut, clean, laundry, bed]
     }
 }

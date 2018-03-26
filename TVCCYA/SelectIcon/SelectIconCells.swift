@@ -14,14 +14,14 @@ class SelectIconCells: UICollectionViewCell {
         didSet{
             if self.isSelected
             {
-                self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                self.contentView.backgroundColor = UIColor.mainLightGreen
+                self.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+//                self.contentView.backgroundColor = UIColor.mainLightGreen
 //                self.checkmarkImageView.isHidden = false
             }
             else
             {
                 self.transform = CGAffineTransform.identity
-                self.contentView.backgroundColor = UIColor.clear
+//                self.contentView.backgroundColor = UIColor.clear
 //                self.checkmarkImageView.isHidden = true
             }
         }

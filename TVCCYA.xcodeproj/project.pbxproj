@@ -13,6 +13,7 @@
 		869CBA3B20656E3C008AD89A /* SelectIconCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869CBA3A20656E3C008AD89A /* SelectIconCollectionViewController.swift */; };
 		869CBA3D2065744D008AD89A /* SelectIconExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869CBA3C2065744D008AD89A /* SelectIconExtension.swift */; };
 		869CBA3F206577EF008AD89A /* SelectIconCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869CBA3E206577EF008AD89A /* SelectIconCells.swift */; };
+		86C77E432069B01D0050A5D9 /* SubscribeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C77E422069B01D0050A5D9 /* SubscribeController.swift */; };
 		86F543C5205EE35F00750A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F543C4205EE35F00750A2B /* AppDelegate.swift */; };
 		86F543C7205EE35F00750A2B /* CreateObjectiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F543C6205EE35F00750A2B /* CreateObjectiveController.swift */; };
 		86F543CA205EE35F00750A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F543C8205EE35F00750A2B /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		869CBA3A20656E3C008AD89A /* SelectIconCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconCollectionViewController.swift; sourceTree = "<group>"; };
 		869CBA3C2065744D008AD89A /* SelectIconExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconExtension.swift; sourceTree = "<group>"; };
 		869CBA3E206577EF008AD89A /* SelectIconCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconCells.swift; sourceTree = "<group>"; };
+		86C77E422069B01D0050A5D9 /* SubscribeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeController.swift; sourceTree = "<group>"; };
 		86F543C1205EE35F00750A2B /* TVCCYA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVCCYA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86F543C4205EE35F00750A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86F543C6205EE35F00750A2B /* CreateObjectiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateObjectiveController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				86F543C4205EE35F00750A2B /* AppDelegate.swift */,
 				869CBA2D2062C3CD008AD89A /* ObjectivesController.swift */,
 				86F543C6205EE35F00750A2B /* CreateObjectiveController.swift */,
+				86C77E422069B01D0050A5D9 /* SubscribeController.swift */,
 				869CBA3720635BE7008AD89A /* CoreDataManager.swift */,
 				86F543C8205EE35F00750A2B /* Main.storyboard */,
 				86F543CB205EE35F00750A2B /* Assets.xcassets */,
@@ -306,6 +309,7 @@
 			files = (
 				86F543C7205EE35F00750A2B /* CreateObjectiveController.swift in Sources */,
 				869CBA2E2062C3CD008AD89A /* ObjectivesController.swift in Sources */,
+				86C77E432069B01D0050A5D9 /* SubscribeController.swift in Sources */,
 				869CBA3420635670008AD89A /* POPModel.xcdatamodeld in Sources */,
 				86F543C5205EE35F00750A2B /* AppDelegate.swift in Sources */,
 				869CBA3820635BE7008AD89A /* CoreDataManager.swift in Sources */,
