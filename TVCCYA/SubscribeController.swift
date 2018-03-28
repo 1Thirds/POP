@@ -27,7 +27,7 @@ class SubcscribeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "SUB CUNT"
+        navigationItem.title = "Subscribe"
         
         view.backgroundColor = UIColor.extraLightBlue
         

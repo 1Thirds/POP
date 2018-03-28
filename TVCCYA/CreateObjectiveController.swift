@@ -16,6 +16,8 @@ protocol CreateObjectiveControllerDelegate {
 
 class CreateObjectiveController: UIViewController, UITextFieldDelegate {
     
+    var selectIconCollectionViewController: SelectIconCollectionViewController?
+    
     var objective: Objective? {
         didSet {
             objTextField.text = objective?.task
@@ -96,7 +98,7 @@ class CreateObjectiveController: UIViewController, UITextFieldDelegate {
         
         navigationItem.title = objective == nil ? "POP" : "Edit POP"
         
-//        print("Image ICON:", objective?.icon ?? "")
+        print("ICON NAME:", selectIconCollectionViewController?.icon?.name ?? "")
     }
     
     var setTaskBottomAnchor: NSLayoutConstraint?
@@ -129,6 +131,7 @@ class CreateObjectiveController: UIViewController, UITextFieldDelegate {
         
         do {
             try context.save()
+        
             self.delegate?.didEditObjective(objective: self.objective!)
             navigationController?.popViewController(animated: true)
             
@@ -148,6 +151,8 @@ class CreateObjectiveController: UIViewController, UITextFieldDelegate {
         let objective = NSEntityDescription.insertNewObject(forEntityName: "Objective", into: context)
         
         objective.setValue(objTextField.text, forKey: "task")
+        
+        print("ICON STRING:", iconImageView.image?.accessibilityIdentifier)
         
         // perform the save
         

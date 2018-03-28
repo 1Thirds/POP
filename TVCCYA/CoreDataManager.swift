@@ -21,4 +21,20 @@ struct CoreDataManager {
         }
         return container
     }()
+    
+    func fetchObjectives() -> [Objective] {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Objective>(entityName: "Objective")
+        
+        do {
+            let objectives = try context.fetch(fetchRequest)
+            
+            return objectives
+            
+        } catch let fetchErr {
+            print("Failed to fetch objectives:", fetchErr)
+            return []
+        }
+    }
 }

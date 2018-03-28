@@ -11,7 +11,7 @@ import CoreData
 
 class SelectIconCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var delegate: CreateObjectiveControllerDelegate?
+    var createObjectiveController: CreateObjectiveController?
     
     var icons = [SelectIconCell]()
     
@@ -39,8 +39,11 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
         dismiss(animated: true, completion: nil)
     }
     
+    var obj: Objective?
+    
     @objc func handleSelect() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+        })
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -77,5 +80,8 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
     var icon: SelectIconCell?
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         icon = icons[indexPath.row]
+        if let iconName = icon?.name {
+            print(iconName)
+        }
     }
 }
