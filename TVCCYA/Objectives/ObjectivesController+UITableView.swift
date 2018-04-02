@@ -52,15 +52,15 @@ extension ObjectivesController {
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
         print("Editing objective in separate function")
         
-        let editObjectiveController = CreateObjectiveController()
+        let enterObjectiveController = CreateObjectiveController()
         
-        editObjectiveController.delegate = self
+        enterObjectiveController.delegate = self
         
-        editObjectiveController.objective = objectives[indexPath.row]
+        enterObjectiveController.objective = objectives[indexPath.row]
         
         //        let navController = CustomNavigationController(rootViewController: editObjectiveController)
         
-        navigationController?.pushViewController(editObjectiveController, animated: true)
+        navigationController?.pushViewController(enterObjectiveController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

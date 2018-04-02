@@ -12,9 +12,9 @@ extension ObjectivesController: CreateObjectiveControllerDelegate {
     
     func didEditObjective(objective: Objective) {
         let row = objectives.index(of: objective)
-        
+
         let reloadIndexPath = IndexPath(row: row!, section: 0)
-        
+
         tableView.reloadRows(at: [reloadIndexPath], with: .middle)
     }
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		860AC592206F678000ACE90B /* EnterObjectiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC591206F678000ACE90B /* EnterObjectiveController.swift */; };
+		860AC594206F743400ACE90B /* AmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC593206F743400ACE90B /* AmountController.swift */; };
+		860AC596206F7C5700ACE90B /* PurposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC595206F7C5700ACE90B /* PurposeController.swift */; };
 		86387037206B022A00233959 /* ObjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86387036206B022A00233959 /* ObjectiveCell.swift */; };
 		8638703D206B06CC00233959 /* ObjectivesController+CreateObjectives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8638703C206B06CC00233959 /* ObjectivesController+CreateObjectives.swift */; };
 		8638703F206B070200233959 /* ObjectivesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8638703E206B070200233959 /* ObjectivesController+UITableView.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		860AC591206F678000ACE90B /* EnterObjectiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterObjectiveController.swift; sourceTree = "<group>"; };
+		860AC593206F743400ACE90B /* AmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountController.swift; sourceTree = "<group>"; };
+		860AC595206F7C5700ACE90B /* PurposeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeController.swift; sourceTree = "<group>"; };
 		86387036206B022A00233959 /* ObjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCell.swift; sourceTree = "<group>"; };
 		8638703C206B06CC00233959 /* ObjectivesController+CreateObjectives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObjectivesController+CreateObjectives.swift"; sourceTree = "<group>"; };
 		8638703E206B070200233959 /* ObjectivesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObjectivesController+UITableView.swift"; sourceTree = "<group>"; };
@@ -98,6 +104,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		860AC590206F676700ACE90B /* Creating Objectives */ = {
+			isa = PBXGroup;
+			children = (
+				860AC591206F678000ACE90B /* EnterObjectiveController.swift */,
+				869CBA3920656E22008AD89A /* SelectIcon */,
+				860AC593206F743400ACE90B /* AmountController.swift */,
+				860AC595206F7C5700ACE90B /* PurposeController.swift */,
+			);
+			path = "Creating Objectives";
+			sourceTree = "<group>";
+		};
 		86387035206B01F400233959 /* Objectives */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +167,8 @@
 		86F543C3205EE35F00750A2B /* TVCCYA */ = {
 			isa = PBXGroup;
 			children = (
+				860AC590206F676700ACE90B /* Creating Objectives */,
 				86387035206B01F400233959 /* Objectives */,
-				869CBA3920656E22008AD89A /* SelectIcon */,
 				869CBA282061BB12008AD89A /* Models */,
 				86F543F2205F10DB00750A2B /* Extension */,
 				86F543C6205EE35F00750A2B /* CreateObjectiveController.swift */,
@@ -330,6 +347,8 @@
 				86F543C7205EE35F00750A2B /* CreateObjectiveController.swift in Sources */,
 				869CBA2E2062C3CD008AD89A /* ObjectivesController.swift in Sources */,
 				86C77E432069B01D0050A5D9 /* SubscribeController.swift in Sources */,
+				860AC594206F743400ACE90B /* AmountController.swift in Sources */,
+				860AC592206F678000ACE90B /* EnterObjectiveController.swift in Sources */,
 				86387037206B022A00233959 /* ObjectiveCell.swift in Sources */,
 				8638703F206B070200233959 /* ObjectivesController+UITableView.swift in Sources */,
 				869CBA3420635670008AD89A /* POPModel.xcdatamodeld in Sources */,
@@ -341,6 +360,7 @@
 				869CBA3D2065744D008AD89A /* SelectIconExtension.swift in Sources */,
 				86F543F4205F10EF00750A2B /* Utils.swift in Sources */,
 				869CBA3B20656E3C008AD89A /* SelectIconCollectionViewController.swift in Sources */,
+				860AC596206F7C5700ACE90B /* PurposeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

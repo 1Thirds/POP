@@ -53,14 +53,14 @@ class ObjectivesController: UITableViewController {
     }
     
     @objc func handleObjective() {
-        let createObjectiveController = CreateObjectiveController()
+        let enterObjectiveController = EnterObjectiveController()
         
 //        let navController = CustomNavigationController(rootViewController: createObjectiveController)
         
-        createObjectiveController.delegate = self
+//        enterObjectiveController.delegate = self
         
 //        present(navController, animated: true, completion: nil)
         
-        navigationController?.pushViewController(createObjectiveController, animated: true)
+        navigationController?.pushViewController(enterObjectiveController, animated: true)
     }
 }

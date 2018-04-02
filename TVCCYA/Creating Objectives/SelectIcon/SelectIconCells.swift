@@ -11,15 +11,13 @@ import UIKit
 class SelectIconCells: UICollectionViewCell {
     
     override var isSelected: Bool{
-        didSet{
+        didSet {
             if self.isSelected
             {
-                self.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                self.transform = CGAffineTransform(scaleX: 1.825, y: 1.825)
 //                self.contentView.backgroundColor = UIColor.mainLightGreen
 //                self.checkmarkImageView.isHidden = false
-            }
-            else
-            {
+            } else {
                 self.transform = CGAffineTransform.identity
 //                self.contentView.backgroundColor = UIColor.clear
 //                self.checkmarkImageView.isHidden = true
@@ -42,6 +40,7 @@ class SelectIconCells: UICollectionViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        iv.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         return iv
     }()
     

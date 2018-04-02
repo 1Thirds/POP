@@ -13,6 +13,10 @@ class ObjectiveCell: UITableViewCell {
     var objective: Objective? {
         didSet {
             objectiveLabel.text = objective?.task
+            
+            if let objectiveIcon = objective?.icon {
+                iconImageView.image = UIImage(named: objectiveIcon)
+            }
         }
     }
     

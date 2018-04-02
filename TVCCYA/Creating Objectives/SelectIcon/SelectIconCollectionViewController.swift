@@ -11,7 +11,16 @@ import CoreData
 
 class SelectIconCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var createObjectiveController: CreateObjectiveController?
+    var task = ""
+    
+//    var objective: Objective? {
+//        didSet {
+//            icon?.image = objective?.icon
+//            if let objectiveTask = objective?.task {
+//                task = objectiveTask
+//            }
+//        }
+//    }
     
     var icons = [SelectIconCell]()
     
@@ -26,7 +35,7 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
         
         navigationItem.title = "Select Icon"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(handleSelect))
         
@@ -35,15 +44,21 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
         setupCells()
     }
     
+    @objc func handleSelect() {
+        toAmountController()
+    }
+    
     @objc func handleCancel() {
         dismiss(animated: true, completion: nil)
     }
     
-    var obj: Objective?
-    
-    @objc func handleSelect() {
-        dismiss(animated: true, completion: {
-        })
+    private func toAmountController() {
+        let amountController = AmountController()
+        amountController.task = task
+        if let iconName = icon?.name {
+            amountController.iconName = iconName
+        }
+        navigationController?.pushViewController(amountController, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -80,8 +95,5 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
     var icon: SelectIconCell?
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         icon = icons[indexPath.row]
-        if let iconName = icon?.name {
-            print(iconName)
-        }
     }
 }
