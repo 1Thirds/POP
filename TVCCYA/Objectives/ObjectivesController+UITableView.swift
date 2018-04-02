@@ -86,10 +86,15 @@ extension ObjectivesController {
         label.textColor = UIColor.mainLightBlue
         
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "plus"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "plusButton").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleObjective), for: .touchUpInside)
         
         view.addSubview(label)
         label.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        view.addSubview(button)
+        button.anchor(top: nil, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 45, height: 45)
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         return view
     }

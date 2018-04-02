@@ -33,7 +33,7 @@ class ObjectivesController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleObjective))
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Progression", style: .plain
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Subscribe", style: .plain
             , target: self, action: #selector(handleSubscribe))
         
         tableView.backgroundColor = UIColor.mainLightBlue
