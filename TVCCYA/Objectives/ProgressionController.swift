@@ -16,6 +16,7 @@ class ProgressionController: UIViewController {
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationItem.title = objective?.task
