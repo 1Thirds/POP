@@ -79,6 +79,18 @@ extension ObjectivesController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor.extraLightBlue
+        
+        let label = UILabel()
+        label.text = "Weekly"
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = UIColor.mainLightBlue
+        
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "plus"), for: .normal)
+        
+        view.addSubview(label)
+        label.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
         return view
     }
     

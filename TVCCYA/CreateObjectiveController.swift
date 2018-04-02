@@ -120,7 +120,7 @@ class CreateObjectiveController: UIViewController, UITextFieldDelegate {
         
         guard let icon = objective?.icon else { return }
         let image = UIImage(named: icon)
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         self.navigationItem.titleView = imageView
