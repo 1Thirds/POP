@@ -31,6 +31,7 @@ class PurposeController: UIViewController, UITextFieldDelegate {
     var iconName = ""
     var unit = ""
     var amount = ""
+    var type = ""
     var delegate: CreateObjectiveControllerDelegate?
     
     let purposeTextField: UITextField = {
@@ -62,7 +63,6 @@ class PurposeController: UIViewController, UITextFieldDelegate {
     private func toObjectivesController() {
         let objectivesController = ObjectivesController()
         navigationController?.pushViewController(objectivesController, animated: true)
-//        navigationController?.popToRootViewController(animated: true)
     }
     
     private func saveObjectiveChanges() {
@@ -93,6 +93,8 @@ class PurposeController: UIViewController, UITextFieldDelegate {
         objective.setValue(unit, forKey: "unit")
         objective.setValue(amount, forKey: "amount")
         objective.setValue(purposeTextField.text, forKey: "purpose")
+        objective.setValue("0", forKey: "updateAmount")
+        objective.setValue(type, forKey: "type")
         
         // perform the save
         
@@ -146,6 +148,8 @@ class PurposeController: UIViewController, UITextFieldDelegate {
         exampleLabel.anchor(top: line.bottomAnchor, left: line.leftAnchor, bottom: nil, right: line.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         purposeTextField.delegate = self
+        
+        print("TYPE:", type)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

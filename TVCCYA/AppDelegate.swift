@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let objectivesController = ObjectivesController()
         let navController = CustomNavigationController(rootViewController: objectivesController)
         window?.rootViewController = navController
+        window?.backgroundColor = UIColor.extraLightBlue
         UINavigationBar.appearance().tintColor = .white
         
         return true

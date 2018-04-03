@@ -25,13 +25,13 @@ class AmountController: UIViewController, UITextFieldDelegate {
     
     var task = ""
     var iconName = ""
+    var type = ""
     
     let amountTextField: UITextField = {
         let tf = UITextField()
         tf.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         tf.keyboardType = .numberPad
-        tf.returnKeyType = .next
         return tf
     }()
     
@@ -77,6 +77,7 @@ class AmountController: UIViewController, UITextFieldDelegate {
         purposeController.iconName = iconName
         purposeController.unit = unitTextField.text!
         purposeController.amount = amountTextField.text!
+        purposeController.type = type
         
         navigationController?.pushViewController(purposeController, animated: true)
     }
@@ -111,7 +112,7 @@ class AmountController: UIViewController, UITextFieldDelegate {
         
         backgroundView.addSubview(amountTextField)
         amountTextField.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
-        amountTextField.anchor(top: nil, left: backgroundView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 32, paddingBottom: 0, paddingRight: 0, width: 32, height: 0)
+        amountTextField.anchor(top: nil, left: backgroundView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 32, paddingBottom: 0, paddingRight: 0, width: 60, height: 0)
         
         amountTextField.addSubview(amountLine)
         amountLine.anchor(top: nil, left: amountTextField.leftAnchor, bottom: amountTextField.bottomAnchor, right: amountTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 1)
@@ -134,9 +135,7 @@ class AmountController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == amountTextField {
-            unitTextField.becomeFirstResponder()
-        } else if textField == unitTextField {
+        if textField == unitTextField {
             self.view.endEditing(true)
             self.handleNext()
         }

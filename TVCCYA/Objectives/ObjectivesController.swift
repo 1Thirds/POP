@@ -13,6 +13,8 @@ class ObjectivesController: UITableViewController {
     
     var objectives = [Objective]()
     
+    var allObjectives = [[Objective]]()
+    
     let cellId = "cellId"
     
     let addObjButton: UIButton = {
@@ -42,6 +44,8 @@ class ObjectivesController: UITableViewController {
         
         tableView.register(ObjectiveCell.self, forCellReuseIdentifier: cellId)
         
+        fetchObjectives()
+        
 //        view.addSubview(addObjButton)
 //        addObjButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 12, paddingRight: 12, width: 75, height: 75)
 //        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -54,13 +58,6 @@ class ObjectivesController: UITableViewController {
     
     @objc func handleObjective() {
         let enterObjectiveController = EnterObjectiveController()
-        
-//        let navController = CustomNavigationController(rootViewController: createObjectiveController)
-        
-//        enterObjectiveController.delegate = self
-        
-//        present(navController, animated: true, completion: nil)
-        
         navigationController?.pushViewController(enterObjectiveController, animated: true)
     }
 }

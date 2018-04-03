@@ -19,9 +19,11 @@ extension ObjectivesController: CreateObjectiveControllerDelegate {
     }
     
     func didAddObjective(objective: Objective) {
-        objectives.append(objective)
-        
-        let newIndexPath = IndexPath(row: objectives.count - 1, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
+//        objectives.append(objective)
+//
+//        let newIndexPath = IndexPath(row: objectives.count - 1, section: 0)
+//        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        fetchObjectives()
+        tableView.reloadData()
     }
 }

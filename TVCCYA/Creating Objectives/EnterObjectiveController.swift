@@ -11,12 +11,6 @@ import CoreData
 
 class EnterObjectiveController: UIViewController, UITextFieldDelegate {
     
-//    var objective: Objective? {
-//        didSet {
-//            objectiveTextField.text = objective?.task
-//        }
-//    }
-    
     let objectiveTextField: UITextField = {
         let tf = UITextField()
         tf.attributedPlaceholder = NSAttributedString(string: "Objective", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
@@ -42,6 +36,7 @@ class EnterObjectiveController: UIViewController, UITextFieldDelegate {
     private func toSelectIconController() {
         let selectIconCollectionViewController = SelectIconCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         selectIconCollectionViewController.task = objectiveTextField.text!
+        selectIconCollectionViewController.type = objectiveTypeSegmentedController.titleForSegment(at: objectiveTypeSegmentedController.selectedSegmentIndex)!
         navigationController?.pushViewController(selectIconCollectionViewController, animated: true)
     }
     
@@ -60,10 +55,17 @@ class EnterObjectiveController: UIViewController, UITextFieldDelegate {
         return label
     }()
     
+    let objectiveTypeSegmentedController: UISegmentedControl = {
+        let types = ["Daily", "Weekly", "Monthly", "Yearly"]
+        let sc = UISegmentedControl(items: types)
+        sc.selectedSegmentIndex = 0
+        sc.tintColor = UIColor.mainLightBlue
+        return sc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationItem.title = objective == nil ? "Set Objective" : "Edit Objective"
         navigationItem.title = "Set Objective"
         view.backgroundColor = UIColor.mainLightBlue
         
@@ -72,6 +74,9 @@ class EnterObjectiveController: UIViewController, UITextFieldDelegate {
         
         view.addSubview(backgroundView)
         backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 200)
+        
+        backgroundView.addSubview(objectiveTypeSegmentedController)
+        objectiveTypeSegmentedController.anchor(top: backgroundView.topAnchor, left: backgroundView.leftAnchor, bottom: nil, right: backgroundView.rightAnchor, paddingTop: 4, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 32)
 
         backgroundView.addSubview(objectiveTextField)
         objectiveTextField.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true

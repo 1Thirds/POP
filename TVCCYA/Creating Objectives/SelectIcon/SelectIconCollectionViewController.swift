@@ -11,16 +11,19 @@ import CoreData
 
 class SelectIconCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var task = ""
+    var delegate: CreateObjectiveControllerDelegate?
     
-//    var objective: Objective? {
-//        didSet {
-//            icon?.image = objective?.icon
-//            if let objectiveTask = objective?.task {
-//                task = objectiveTask
-//            }
-//        }
-//    }
+    var objective: Objective? {
+        didSet {
+            guard let objectiveTask = objective?.task else { return }
+            task = objectiveTask
+            
+            icon?.name = objective?.icon
+        }
+    }
+    
+    var task = ""
+    var type = ""
     
     var icons = [SelectIconCell]()
     
@@ -35,8 +38,6 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
         
         navigationItem.title = "Select Icon"
         
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(handleSelect))
         
         collectionView?.register(SelectIconCells.self, forCellWithReuseIdentifier: cellId)
@@ -45,20 +46,69 @@ class SelectIconCollectionViewController: UICollectionViewController, UICollecti
     }
     
     @objc func handleSelect() {
-        toAmountController()
-    }
-    
-    @objc func handleCancel() {
-        dismiss(animated: true, completion: nil)
+        if type == "Daily" {
+            if objective == nil {
+                createObjective()
+            } else {
+                saveObjectiveChanges()
+            }
+        } else {
+            toAmountController()
+        }
     }
     
     private func toAmountController() {
         let amountController = AmountController()
+        
         amountController.task = task
+        
         if let iconName = icon?.name {
             amountController.iconName = iconName
         }
+        
+        amountController.type = type
+        
         navigationController?.pushViewController(amountController, animated: true)
+    }
+    
+    private func toObjectivesController() {
+        let objectivesController = ObjectivesController()
+        navigationController?.pushViewController(objectivesController, animated: true)
+    }
+    
+    private func saveObjectiveChanges() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        objective?.task = task
+        objective?.icon = icon?.name
+        
+        do {
+            try context.save()
+            self.delegate?.didEditObjective(objective: self.objective!)
+            toObjectivesController()
+        } catch let saveErr {
+            print("Failed to save objective changes:", saveErr)
+        }
+    }
+    
+    private func createObjective() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        let objective = NSEntityDescription.insertNewObject(forEntityName: "Objective", into: context)
+        
+        objective.setValue(task, forKey: "task")
+        objective.setValue(icon?.name, forKey: "icon")
+        objective.setValue(type, forKey: "type")
+        
+        // perform the save
+        
+        do {
+            try context.save()
+            self.delegate?.didAddObjective(objective: objective as! Objective)
+            toObjectivesController()
+        } catch let saveErr {
+            print("Failed to save objective:", saveErr)
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

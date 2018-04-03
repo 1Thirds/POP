@@ -6,10 +6,11 @@
         <attribute name="plan" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purpose" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="task" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateAmount" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Objective" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="Objective" positionX="-54" positionY="-9" width="128" height="165"/>
     </elements>
 </model>

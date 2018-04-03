@@ -28,6 +28,8 @@ extension UIColor {
 
     static let mainDarkGreen = UIColor.rgb(red: 32, green: 81, blue: 83)
     
+    static let doneGreen = UIColor.rgb(red: 80, green: 154, blue: 111)
+    
     static let mainRed = UIColor.rgb(red: 192, green: 123, blue: 123)
     
     static let deleteRed = UIColor.rgb(red: 153, green: 98, blue: 98)
@@ -36,7 +38,7 @@ extension UIColor {
     
     static let mainOrange = UIColor.rgb(red: 198, green: 113, blue: 81)
     
-    static let mainLightOrange = UIColor.rgb(red: 232, green: 198, blue: 185)
+    static let mainLightOrange = UIColor.rgb(red: 215, green: 155, blue: 133)
 }
 
 extension UIView {
