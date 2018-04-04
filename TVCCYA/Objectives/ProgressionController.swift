@@ -13,36 +13,75 @@ class ProgressionController: UIViewController {
     
     var objective: Objective? {
         didSet {
-            purposeText.text = objective?.purpose
-            taskText.text = objective?.task
+            purposeLabel.text = objective?.purpose
+            taskLabel.text = objective?.task
             capNumber.text = objective?.amount
-            currentProgress.text = String((objective?.updateAmount)! + "/" + (objective?.amount)!)        }
+            
+            if let objectiveUnit = objective?.unit {
+                unitLabel.text = "(\(objectiveUnit))"
+            }
+            
+            setupAttributedCurrentProgress()
+        }
     }
     
+    fileprivate func setupAttributedCurrentProgress() {
+        guard let objectiveType = objective?.type else { return }
+        
+        if objectiveType == "Weekly" {
+            attributedTextHelper(color: UIColor.mainLightGreen)
+            progressView.progressTintColor = UIColor.mainLightGreen
+            capNumber.textColor = UIColor.mainDarkGreen
+        } else if objectiveType == "Monthly" {
+            attributedTextHelper(color: UIColor.mainLightOrange)
+            progressView.progressTintColor = UIColor.mainLightOrange
+            capNumber.textColor = UIColor.mainOrange
+        } else if objectiveType == "Yearly" {
+            attributedTextHelper(color: UIColor.mainRed)
+            progressView.progressTintColor = UIColor.mainRed
+            capNumber.textColor = UIColor.deleteRed
+        }
+        
+//        guard let capValue = objective?.amount else {return}
+//        guard let currentValue = objective?.updateAmount else {return}
+//
+//        let capVal = Double(capValue)
+//        guard let capDouble = capVal else { return }
+//        let currentVal = Double(currentValue)
+//
+//        guard let currentDouble = currentVal else { return }
+//        let currentPercent = ((currentDouble * 100)/capDouble) * 0.01
+//
+//        //progressView.setProgress(Float(currentPercent), animated: true)
+//        progressView.animate(currentPercent: Float(currentPercent), duration: 1.5)
+    }
+    
+    private func attributedTextHelper(color: UIColor) {
+        guard let updateAmount = objective?.updateAmount else { return }
+        guard let objectiveAmount = objective?.amount else { return }
+        guard let objectiveUnit = objective?.unit else { return }
+        
+        let attributedText = NSMutableAttributedString(string: updateAmount, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: color])
+        
+        attributedText.append(NSAttributedString(string: " / \(objectiveAmount) ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.mainDarkGray]))
+        
+        attributedText.append(NSAttributedString(string: "\(objectiveUnit)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray]))
+        
+        currentProgress.attributedText = attributedText
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationItem.title = objective?.task
+        navigationItem.title = objective?.type
     }
     
     let capNumber: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.mainLightBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        //label.textAlignment = .center
         return label
     }()
     
-    let taskText: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.mainLightBlue
-        label.font = UIFont.boldSystemFont(ofSize: 26)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
-    
-    let purposeText: UILabel = {
+    let purposeLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.mainDarkGray
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -74,42 +113,60 @@ class ProgressionController: UIViewController {
         return view
     }()
     
-    let updateAmountTextField: UITextField = {
+    let enterProgressTextField: UITextField = {
         let tf = UITextField()
-        tf.attributedPlaceholder = NSAttributedString(string: "Amount", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
+        tf.attributedPlaceholder = NSAttributedString(string: "Enter Progress", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
         tf.textAlignment = .center
         tf.keyboardType = .numberPad
+        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
+    
+    @objc func handleTextInputChange() {
+        let isFormValid = enterProgressTextField.text?.count ?? 0 > 0
+        
+        if isFormValid {
+            updateButton.isEnabled = true
+            updateButton.backgroundColor = UIColor.mainLightBlue
+        } else {
+            updateButton.isEnabled = false
+            updateButton.backgroundColor = UIColor.mainLightBlue.withAlphaComponent(0.5)
+        }
+    }
     
     let updateButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Update", for: .normal)
-        button.backgroundColor = UIColor.mainLightBlue
         button.addTarget(self, action: #selector(handleAmountAdded), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.backgroundColor = UIColor.mainLightBlue.withAlphaComponent(0.5)
         button.layer.cornerRadius = 5
         return button
     }()
     
-    func setProgress(){
-        currentProgress.text = String((objective?.updateAmount)! + "/" + (objective?.amount)!)
+    func setProgress() {
+        
+        setupAttributedCurrentProgress()
+        
         guard let capValue = objective?.amount else {return}
         guard let currentValue = objective?.updateAmount else {return}
+
         let capVal = Double(capValue)
         guard let capDouble = capVal else { return }
         let currentVal = Double(currentValue)
+
         guard let currentDouble = currentVal else { return }
         let currentPercent = ((currentDouble * 100)/capDouble) * 0.01
-        
+
         //progressView.setProgress(Float(currentPercent), animated: true)
         progressView.animate(currentPercent: Float(currentPercent), duration: 1.5)
     }
     
-    func getCurrentProgress()->String{
-        let currentProgress = String((objective?.updateAmount)! + "/" + (objective?.amount)!)
-        return currentProgress
-    }
+//    func getCurrentProgress() -> String {
+//        let currentProgress = String((objective?.updateAmount)! + "/" + (objective?.amount)!)
+//        return currentProgress
+//    }
     
     let currentProgress: UILabel = {
         let label = UILabel()
@@ -120,24 +177,23 @@ class ProgressionController: UIViewController {
     }()
     
     let progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progressTintColor = UIColor.mainOrange
-        
+        let pv = UIProgressView()
         //progressView.setProgress(currentPercent, animated: true)
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        return progressView
+        pv.translatesAutoresizingMaskIntoConstraints = false
+        pv.trackTintColor = UIColor.mainLightGray.withAlphaComponent(0.6)
+        return pv
     }()
     
     @objc func handleAmountAdded() {
-        let isFormValid = updateAmountTextField.text?.count ?? 0 > 0
+        let isFormValid = enterProgressTextField.text?.count ?? 0 > 0
         
-        if(isFormValid){
-            self.view!.endEditing(true)
-            guard let currentValue = objective?.updateAmount else {return}
+        if isFormValid {
+            self.view.endEditing(true)
+            guard let currentValue = objective?.updateAmount else { return }
             let currentVal = Double(currentValue)
             guard let currentDouble = currentVal else { return }
             
-            guard let inputValue = updateAmountTextField.text else {return}
+            guard let inputValue = enterProgressTextField.text else { return }
             let inputVal = Double(inputValue)
             guard let inputDouble = inputVal else { return }
             
@@ -150,69 +206,97 @@ class ProgressionController: UIViewController {
             let totalUpdateValDouble = currentDouble + inputDouble
             
             if(totalUpdateValDouble >= capDouble){
-                totalUpdateVal = (objective?.amount)!
+                if let objectiveAmount = objective?.amount {
+                    totalUpdateVal = objectiveAmount
+                }
             }
-            
-            let context = CoreDataManager.shared.persistentContainer.viewContext
-            let updateAmount = NSEntityDescription.insertNewObject(forEntityName: "Objective", into: context)
-            updateAmount.setValue(totalUpdateVal, forKey: "updateAmount")
-            
-            
-            context.delete(updateAmount)
-            objective?.updateAmount = totalUpdateVal
-            
-            do {
-                try context.save()
-                
-            } catch let saveErr {
-                print("Failed to save company:", saveErr)
-            }
-            updateAmountTextField.text = nil
-            self.viewDidLoad()
+            updateAmountInCoreData(totalUpdateVal: totalUpdateVal)
         }
+    }
+    
+    private func updateAmountInCoreData(totalUpdateVal: String) {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let updateAmount = NSEntityDescription.insertNewObject(forEntityName: "Objective", into: context)
+        updateAmount.setValue(totalUpdateVal, forKey: "updateAmount")
+        
+        context.delete(updateAmount)
+        objective?.updateAmount = totalUpdateVal
+        
+        do {
+            try context.save()
+            
+        } catch let saveErr {
+            print("Failed to save company:", saveErr)
+        }
+        enterProgressTextField.text = nil
+        self.viewDidLoad()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.extraLightBlue
+        
         setProgress()
         
-        view.addSubview(updateButton)
-        updateButton.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 120, paddingLeft: 50, paddingBottom: 50, paddingRight: 50, width: 0, height: 40)
+        setupUI()
+        
+//        guard let currentValue = objective?.updateAmount else {return}
+//        let currentVal = Double(currentValue)
+//        guard let currentDouble = currentVal else { return }
+//        guard let capValue = objective?.amount else {return}
+//        let capVal = Double(capValue)
+//        guard let capDouble = capVal else { return }
+//
+//        if(currentDouble >= capDouble){
+//            view.addSubview(gratsLabel)
+//            gratsLabel.anchor(top: progressView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 40)
+//        }
+    }
+    
+    let taskLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .mainDarkGray
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
+    let unitLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .mainLightGray
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
+    private func setupUI() {
+        view.addSubview(enterProgressTextField)
+        enterProgressTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 32, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         view.addSubview(line)
-        line.anchor(top: updateButton.topAnchor, left: updateButton.leftAnchor, bottom: nil, right: updateButton.rightAnchor, paddingTop: -28, paddingLeft: 40, paddingBottom: 50, paddingRight: 40, width: 0, height: 1)
-        
-        view.addSubview(purposeText)
-        purposeText.anchor(top: nil, left: updateButton.leftAnchor, bottom: line.topAnchor , right:updateButton.rightAnchor, paddingTop: 0, paddingLeft: -50, paddingBottom: -205, paddingRight: -50, width: 0, height: 50)
-        
-        view.addSubview(taskText)
-        taskText.anchor(top: nil, left: updateButton.leftAnchor, bottom: line.topAnchor , right:updateButton.rightAnchor, paddingTop: 0, paddingLeft: -50, paddingBottom: 30, paddingRight: -50, width: 0, height: 50)
-        
-        view.addSubview(updateAmountTextField)
-        updateAmountTextField.anchor(top: nil, left: updateButton.leftAnchor, bottom: line.topAnchor , right:updateButton.rightAnchor, paddingTop: 0, paddingLeft: 100, paddingBottom: -10, paddingRight: 100, width: 0, height: 50)
+        line.anchor(top: nil, left: view.leftAnchor, bottom: enterProgressTextField.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, paddingBottom: -8, paddingRight: 50, width: 0, height: 1)
         
         view.addSubview(currentProgress)
-        currentProgress.anchor(top: nil, left: updateButton.leftAnchor, bottom: updateButton.topAnchor , right:updateButton.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -12, paddingRight: 0, width: 0, height: 50)
+        currentProgress.anchor(top: line.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        view.addSubview(updateButton)
+        updateButton.anchor(top: currentProgress.bottomAnchor, left: line.leftAnchor, bottom: nil, right: line.rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 40)
+        
+        view.addSubview(taskLabel)
+        taskLabel.anchor(top: updateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 36, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         view.addSubview(progressView)
-        progressView.anchor(top: updateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 40, paddingRight: 30, width: 0, height: 40)
+        progressView.anchor(top: taskLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 8, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 40)
         
         view.addSubview(capNumber)
         capNumber.anchor(top: progressView.bottomAnchor, left: nil, bottom: nil, right: progressView.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        guard let currentValue = objective?.updateAmount else {return}
-        let currentVal = Double(currentValue)
-        guard let currentDouble = currentVal else { return }
-        guard let capValue = objective?.amount else {return}
-        let capVal = Double(capValue)
-        guard let capDouble = capVal else { return }
+        view.addSubview(unitLabel)
+        unitLabel.anchor(top: capNumber.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        if(currentDouble >= capDouble){
-            view.addSubview(gratsLabel)
-            gratsLabel.anchor(top: progressView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 40)
-        }
+        view.addSubview(purposeLabel)
+        purposeLabel.anchor(top: unitLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 32, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
