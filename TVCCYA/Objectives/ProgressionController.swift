@@ -41,19 +41,6 @@ class ProgressionController: UIViewController {
             progressView.progressTintColor = UIColor.mainRed
             capNumber.textColor = UIColor.mainDarkRed
         }
-        
-//        guard let capValue = objective?.amount else {return}
-//        guard let currentValue = objective?.updateAmount else {return}
-//
-//        let capVal = Double(capValue)
-//        guard let capDouble = capVal else { return }
-//        let currentVal = Double(currentValue)
-//
-//        guard let currentDouble = currentVal else { return }
-//        let currentPercent = ((currentDouble * 100)/capDouble) * 0.01
-//
-//        //progressView.setProgress(Float(currentPercent), animated: true)
-//        progressView.animate(currentPercent: Float(currentPercent), duration: 1.5)
     }
     
     private func attributedTextHelper(color: UIColor) {

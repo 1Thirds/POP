@@ -146,15 +146,48 @@ extension ObjectivesController {
         
         if indexPath.section == 0 {
             backgroundView.backgroundColor = UIColor.mainBlue
+            
+            cell.unitLabel.removeFromSuperview()
+            cell.currentProgress.removeFromSuperview()
+            
             cell.addSubview(cell.slider)
-            cell.slider.anchor(top: nil, left: cell.objectiveLabel.rightAnchor, bottom: nil, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+            cell.slider.anchor(top: nil, left: cell.objectiveLabel.rightAnchor, bottom: nil, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
             cell.slider.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            
         } else if indexPath.section == 1 {
             backgroundView.backgroundColor = UIColor.mainLightGreen
+            
+            cell.slider.removeFromSuperview()
+            
+            cell.addSubview(cell.unitLabel)
+            cell.unitLabel.anchor(top: cell.objectiveLabel.topAnchor, left: nil, bottom: cell.objectiveLabel.bottomAnchor, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 50, height: 0)
+
+            cell.addSubview(cell.currentProgress)
+            cell.currentProgress.anchor(top: nil, left: nil, bottom: nil, right: cell.unitLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+            cell.currentProgress.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            
         } else if indexPath.section == 2 {
             backgroundView.backgroundColor = UIColor.mainLightOrange
-        } else {
+            
+            cell.slider.removeFromSuperview()
+            
+            cell.addSubview(cell.unitLabel)
+            cell.unitLabel.anchor(top: cell.objectiveLabel.topAnchor, left: nil, bottom: cell.objectiveLabel.bottomAnchor, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 50, height: 0)
+
+            cell.addSubview(cell.currentProgress)
+            cell.currentProgress.anchor(top: nil, left: nil, bottom: nil, right: cell.unitLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+            cell.currentProgress.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        } else if indexPath.section == 3 {
             backgroundView.backgroundColor = UIColor.mainRed
+            
+            cell.slider.removeFromSuperview()
+            
+//            cell.addSubview(cell.unitLabel)
+//            cell.unitLabel.anchor(top: cell.objectiveLabel.topAnchor, left: nil, bottom: cell.objectiveLabel.bottomAnchor, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 50, height: 0)
+//
+//            cell.addSubview(cell.currentProgress)
+//            cell.currentProgress.anchor(top: nil, left: nil, bottom: nil, right: cell.unitLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+//            cell.currentProgress.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
         }
         
         cell.selectedBackgroundView = backgroundView

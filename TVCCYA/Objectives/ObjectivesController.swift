@@ -67,7 +67,6 @@ class ObjectivesController: UITableViewController {
     
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         self.objectives = CoreDataManager.shared.fetchObjectives()
-        print(objectives)
         var indexPathsToReload = [IndexPath]()
         
         if(objective?.type == "Daily"){
