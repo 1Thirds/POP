@@ -145,6 +145,8 @@ extension ObjectivesController {
         
         if indexPath.section == 0 {
             backgroundView.backgroundColor = UIColor.mainBlue
+            cell.addSubview(cell.slider)
+            cell.slider.anchor(top: cell.topAnchor, left: cell.objectiveLabel.rightAnchor, bottom: cell.bottomAnchor, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
         } else if indexPath.section == 1 {
             backgroundView.backgroundColor = UIColor.mainLightGreen
         } else if indexPath.section == 2 {
