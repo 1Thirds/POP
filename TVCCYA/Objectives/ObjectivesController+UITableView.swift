@@ -21,7 +21,6 @@ extension ObjectivesController {
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Done") { (_, indexPath) in
             let objective = self.allObjectives[indexPath.section][indexPath.row]
-            print("attempting to delete objective:", objective.task ?? "")
             
             // remove the task from our tableView
             self.allObjectives[indexPath.section].remove(at: indexPath.row)

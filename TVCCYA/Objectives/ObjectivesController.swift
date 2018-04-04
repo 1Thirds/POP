@@ -60,15 +60,21 @@ class ObjectivesController: UITableViewController {
 //        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    var objective: Objective? {
+        didSet {
+        }
+    }
+    
     @objc func refresh(_ refreshControl: UIRefreshControl) {
-        //let objectives = [Objective]()
         self.objectives = CoreDataManager.shared.fetchObjectives()
         print(objectives)
         var indexPathsToReload = [IndexPath]()
         
-        for (index, _) in objectives.enumerated() {
-            let indexPath = IndexPath(row: index, section: 0)
-            indexPathsToReload.append(indexPath)
+        if(objective?.type == "Daily"){
+            for (index, _) in objectives.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                indexPathsToReload.append(indexPath)
+            }
         }
         
         self.tableView.reloadRows(at: indexPathsToReload, with: .right)
