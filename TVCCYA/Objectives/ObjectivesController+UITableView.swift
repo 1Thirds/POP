@@ -24,8 +24,7 @@ extension ObjectivesController {
             print("attempting to delete objective:", objective.task ?? "")
             
             // remove the task from our tableView
-            
-            self.allObjectives.remove(at: indexPath.row)
+            self.allObjectives[indexPath.section].remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
             // delete the objective from core data

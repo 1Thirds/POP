@@ -66,17 +66,14 @@ class ObjectivesController: UITableViewController {
         print(objectives)
         var indexPathsToReload = [IndexPath]()
         
-        for indexPath in indexPathsToReload{
-            if indexPath.section == 0 {
-                for (index, _) in objectives.enumerated() {
-                    let indexPath = IndexPath(row: index, section: 0)
-                    indexPathsToReload.append(indexPath)
-                }
-            }
+        for (index, _) in objectives.enumerated() {
+            let indexPath = IndexPath(row: index, section: 0)
+            indexPathsToReload.append(indexPath)
         }
         
         self.tableView.reloadRows(at: indexPathsToReload, with: .right)
         self.tableView.reloadData()
+        fetchObjectives()
         refreshControl.endRefreshing()
     }
     
