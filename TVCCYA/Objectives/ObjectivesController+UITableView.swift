@@ -70,7 +70,10 @@ extension ObjectivesController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return objectives.count == 0 ? 150 : 0
+        if section == 0 {
+            return objectives.count == 0 ? 75 : 0
+        }
+        return 0
     }
     
     func fetchObjectives() {
