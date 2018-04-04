@@ -146,7 +146,8 @@ extension ObjectivesController {
         if indexPath.section == 0 {
             backgroundView.backgroundColor = UIColor.mainBlue
             cell.addSubview(cell.slider)
-            cell.slider.anchor(top: cell.topAnchor, left: cell.objectiveLabel.rightAnchor, bottom: cell.bottomAnchor, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+            cell.slider.anchor(top: nil, left: cell.objectiveLabel.rightAnchor, bottom: nil, right: cell.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+            cell.slider.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
         } else if indexPath.section == 1 {
             backgroundView.backgroundColor = UIColor.mainLightGreen
         } else if indexPath.section == 2 {
@@ -165,8 +166,6 @@ extension ObjectivesController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableViewAutomaticDimension
-        return 50
+        return UITableViewAutomaticDimension
     }
 }

@@ -27,7 +27,7 @@ struct CoreDataManager {
         
         let fetchRequest = NSFetchRequest<Objective>(entityName: "Objective")
         
-        let sort = NSSortDescriptor(key: "priority", ascending: false)
+        let sort = NSSortDescriptor(key: "priority", ascending: true)
         fetchRequest.sortDescriptors = [sort]
         
         do {

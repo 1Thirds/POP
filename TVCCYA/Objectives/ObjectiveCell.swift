@@ -32,6 +32,8 @@ class ObjectiveCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         return label
     }()
     
@@ -88,33 +90,35 @@ class ObjectiveCell: UITableViewCell {
         } catch let saveErr {
             print("Failed to save company:", saveErr)
         }
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Objective")
-        request.returnsObjectsAsFaults = false
-        do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                //print(data.value(forKey: "priority") as! Float)
-                //print(data.value(forKey: "sliderReload") as! Bool)
-            }
-            
-        } catch {
-            
-            print("Failed")
-        }
     }
     
+    let topContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let bottomContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.cellBlue
+        
+        addSubview(topContainer)
+        topContainer.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 15)
         
         addSubview(iconImageView)
         iconImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
         iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(objectiveLabel)
-        objectiveLabel.anchor(top: topAnchor, left: iconImageView.rightAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 125, height: 0)
+        objectiveLabel.anchor(top: nil, left: iconImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 125, height: 0)
+        objectiveLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        addSubview(bottomContainer)
+        bottomContainer.anchor(top: objectiveLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 15)
     }
     
     required init?(coder aDecoder: NSCoder) {

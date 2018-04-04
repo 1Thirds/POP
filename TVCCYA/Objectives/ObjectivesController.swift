@@ -27,11 +27,20 @@ class ObjectivesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.backgroundView = refreshControl
+        }
+        
         self.objectives = CoreDataManager.shared.fetchObjectives()
         
         view.backgroundColor = .white
         
-        navigationItem.title = "Objectives"
+        navigationItem.title = "POP"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleObjective))
         
@@ -49,6 +58,26 @@ class ObjectivesController: UITableViewController {
 //        view.addSubview(addObjButton)
 //        addObjButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 12, paddingRight: 12, width: 75, height: 75)
 //        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
+        //let objectives = [Objective]()
+        self.objectives = CoreDataManager.shared.fetchObjectives()
+        print(objectives)
+        var indexPathsToReload = [IndexPath]()
+        
+        for indexPath in indexPathsToReload{
+            if indexPath.section == 0 {
+                for (index, _) in objectives.enumerated() {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    indexPathsToReload.append(indexPath)
+                }
+            }
+        }
+        
+        self.tableView.reloadRows(at: indexPathsToReload, with: .right)
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     @objc func handleSubscribe() {
