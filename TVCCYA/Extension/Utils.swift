@@ -32,7 +32,7 @@ extension UIColor {
     
     static let mainRed = UIColor.rgb(red: 192, green: 123, blue: 123)
     
-    static let deleteRed = UIColor.rgb(red: 153, green: 98, blue: 98)
+    static let mainDarkRed = UIColor.rgb(red: 153, green: 98, blue: 98)
     
     static let mainLightGreen = UIColor.rgb(red: 89, green: 172, blue: 124)
     

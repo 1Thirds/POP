@@ -39,7 +39,7 @@ class ProgressionController: UIViewController {
         } else if objectiveType == "Yearly" {
             attributedTextHelper(color: UIColor.mainRed)
             progressView.progressTintColor = UIColor.mainRed
-            capNumber.textColor = UIColor.deleteRed
+            capNumber.textColor = UIColor.mainDarkRed
         }
         
 //        guard let capValue = objective?.amount else {return}
@@ -205,7 +205,7 @@ class ProgressionController: UIViewController {
             var totalUpdateVal = String(totalUpdateValInt)
             let totalUpdateValDouble = currentDouble + inputDouble
             
-            if(totalUpdateValDouble >= capDouble){
+            if (totalUpdateValDouble >= capDouble) {
                 if let objectiveAmount = objective?.amount {
                     totalUpdateVal = objectiveAmount
                 }
@@ -252,6 +252,14 @@ class ProgressionController: UIViewController {
 //            view.addSubview(gratsLabel)
 //            gratsLabel.anchor(top: progressView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 40)
 //        }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Progress", style: .plain, target: self, action: #selector(handleResetProgress))
+    }
+    
+    var delegate: CreateObjectiveControllerDelegate?
+    
+    @objc func handleResetProgress() {
+        updateAmountInCoreData(totalUpdateVal: "0")
     }
     
     let taskLabel: UILabel = {
