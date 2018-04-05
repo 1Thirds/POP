@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8600DC11207545850015E69C /* ExpandableObjectives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600DC10207545850015E69C /* ExpandableObjectives.swift */; };
+		8600DC13207593530015E69C /* DailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600DC12207593530015E69C /* DailyCell.swift */; };
 		860AC592206F678000ACE90B /* EnterObjectiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC591206F678000ACE90B /* EnterObjectiveController.swift */; };
 		860AC594206F743400ACE90B /* AmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC593206F743400ACE90B /* AmountController.swift */; };
 		860AC596206F7C5700ACE90B /* PurposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860AC595206F7C5700ACE90B /* PurposeController.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8600DC10207545850015E69C /* ExpandableObjectives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableObjectives.swift; sourceTree = "<group>"; };
+		8600DC12207593530015E69C /* DailyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyCell.swift; sourceTree = "<group>"; };
 		860AC591206F678000ACE90B /* EnterObjectiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterObjectiveController.swift; sourceTree = "<group>"; };
 		860AC593206F743400ACE90B /* AmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountController.swift; sourceTree = "<group>"; };
 		860AC595206F7C5700ACE90B /* PurposeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeController.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		86387035206B01F400233959 /* Objectives */ = {
 			isa = PBXGroup;
 			children = (
+				8600DC12207593530015E69C /* DailyCell.swift */,
 				869CBA2D2062C3CD008AD89A /* ObjectivesController.swift */,
 				86387036206B022A00233959 /* ObjectiveCell.swift */,
 				8638703C206B06CC00233959 /* ObjectivesController+CreateObjectives.swift */,
@@ -144,7 +149,7 @@
 		869CBA282061BB12008AD89A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				869CBA3C2065744D008AD89A /* SelectIconExtension.swift */,
+				8600DC10207545850015E69C /* ExpandableObjectives.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 		86F543F2205F10DB00750A2B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				869CBA3C2065744D008AD89A /* SelectIconExtension.swift */,
 				86F543F3205F10EF00750A2B /* Utils.swift */,
 			);
 			path = Extension;
@@ -361,6 +367,7 @@
 				86F543C7205EE35F00750A2B /* CreateObjectiveController.swift in Sources */,
 				86291A912073398B00FA5021 /* DailySelectIconCollectionViewController.swift in Sources */,
 				869CBA2E2062C3CD008AD89A /* ObjectivesController.swift in Sources */,
+				8600DC11207545850015E69C /* ExpandableObjectives.swift in Sources */,
 				86C77E432069B01D0050A5D9 /* SubscribeController.swift in Sources */,
 				860AC594206F743400ACE90B /* AmountController.swift in Sources */,
 				860AC592206F678000ACE90B /* EnterObjectiveController.swift in Sources */,
@@ -373,6 +380,7 @@
 				86387041206B0ACC00233959 /* ProgressionController.swift in Sources */,
 				86291A8F2073385E00FA5021 /* DailyEnterObjectiveController.swift in Sources */,
 				869CBA3F206577EF008AD89A /* SelectIconCells.swift in Sources */,
+				8600DC13207593530015E69C /* DailyCell.swift in Sources */,
 				869CBA3D2065744D008AD89A /* SelectIconExtension.swift in Sources */,
 				86F543F4205F10EF00750A2B /* Utils.swift in Sources */,
 				869CBA3B20656E3C008AD89A /* SelectIconCollectionViewController.swift in Sources */,

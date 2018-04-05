@@ -30,11 +30,11 @@ extension UIColor {
     
     static let doneGreen = UIColor.rgb(red: 80, green: 154, blue: 111)
     
-    static let mainRed = UIColor.rgb(red: 192, green: 123, blue: 123)
+    static let mainDarkRed = UIColor.rgb(red: 134, green: 86, blue: 86)
     
-    static let mainDarkRed = UIColor.rgb(red: 153, green: 98, blue: 98)
+    static let mainRed = UIColor.rgb(red: 153, green: 98, blue: 98)
     
-    static let mainLightGreen = UIColor.rgb(red: 89, green: 172, blue: 124)
+    static let mainLightGreen = UIColor.rgb(red: 138, green: 196, blue: 163)
     
     static let mainOrange = UIColor.rgb(red: 198, green: 113, blue: 81)
     

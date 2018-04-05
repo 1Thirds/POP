@@ -13,9 +13,11 @@ class ObjectivesController: UITableViewController {
     
     var objectives = [Objective]()
     
-    var allObjectives = [[Objective]]()
+//    var allObjectives = [[Objective]]()
+    var allObjectives = [ExpandableObjectives]()
     
     let cellId = "cellId"
+    let dailyCellId = "dailyCellId"
     
     let addObjButton: UIButton = {
         let button = UIButton(type: .system)
@@ -52,6 +54,7 @@ class ObjectivesController: UITableViewController {
         tableView.separatorColor = .white
         
         tableView.register(ObjectiveCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(DailyCell.self, forCellReuseIdentifier: dailyCellId)
         
         fetchObjectives()
         
@@ -60,16 +63,13 @@ class ObjectivesController: UITableViewController {
 //        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    var objective: Objective? {
-        didSet {
-        }
-    }
+    var objective: Objective?
     
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         self.objectives = CoreDataManager.shared.fetchObjectives()
         var indexPathsToReload = [IndexPath]()
         
-        if(objective?.type == "Daily"){
+        if(objective?.type == "Daily") {
             for (index, _) in objectives.enumerated() {
                 let indexPath = IndexPath(row: index, section: 0)
                 indexPathsToReload.append(indexPath)
@@ -90,5 +90,24 @@ class ObjectivesController: UITableViewController {
     @objc func handleObjective() {
         let enterObjectiveController = EnterObjectiveController()
         navigationController?.pushViewController(enterObjectiveController, animated: true)
+    }
+    
+    @objc func handleExpandClose(button: UIButton) {
+        let section = button.tag
+        
+        var indexPaths = [IndexPath]()
+        for row in allObjectives[section].objectives.indices {
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = allObjectives[section].isExpanded
+        allObjectives[section].isExpanded = !isExpanded
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
     }
 }
