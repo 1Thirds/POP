@@ -72,15 +72,31 @@ class DailyCell: UITableViewCell {
     // create a new coreData object with just sliderValue and call it within createCompany()
     @objc func sliderValueDidChange(_ sender:UISlider!) {
         //print("Slider Value--\(sender.value)")
-        if(sender.value <= 30) {sender.tintColor = UIColor.mainLightGreen}
-        if(sender.value > 30 && sender.value < 70) {sender.tintColor = UIColor.mainLightOrange}
-        if(sender.value >= 70 && sender.value < 100) {sender.tintColor = UIColor.mainDarkRed}
-        if(sender.value == 100) {sender.tintColor = UIColor.mainBlue}
+        
+//        if(sender.value <= 15) {slider.tintColor = UIColor.mainLightGreen}
+//        else if(sender.value > 15 && sender.value <= 25) {slider.tintColor = UIColor.mainDarkGreen}
+//        else if(sender.value > 35 && sender.value <= 45) {slider.tintColor = UIColor.mainLightOrange}
+//        else if(sender.value > 55 && sender.value <= 70) {slider.tintColor = UIColor.mainOrange}
+//        else if(sender.value > 70 && sender.value <= 85) {slider.tintColor = UIColor.mainRed}
+//        else if(sender.value > 85 && sender.value <= 100) {slider.tintColor = UIColor.mainDarkRed}
+        
+        if(sender.value <= 10) {slider.tintColor = UIColor.mainLightGreen}
+        else if(sender.value > 10 && sender.value <= 20) {slider.tintColor = UIColor.sliderGreen}
+        else if(sender.value > 20 && sender.value <= 30) {slider.tintColor = UIColor.sliderDarkGreen}
+        else if(sender.value > 30 && sender.value <= 40) {slider.tintColor = UIColor.mainLightOrange}
+        else if(sender.value > 40 && sender.value <= 50) {slider.tintColor = UIColor.mainOrange}
+        else if(sender.value > 50 && sender.value <= 60) {slider.tintColor = UIColor.sliderDarkOrange}
+        else if(sender.value > 60 && sender.value <= 70) {slider.tintColor = UIColor.sliderLightRed}
+        else if(sender.value > 70 && sender.value <= 80) {slider.tintColor = UIColor.mainRed}
+        else if(sender.value > 80 && sender.value <= 90) {slider.tintColor = UIColor.mainDarkRed}
+        else if(sender.value > 90 && sender.value <= 100) {slider.tintColor = UIColor.mainDarkRed}
         
         sender.setValue(sender.value, animated: true)
         saveSlider(sender: sender.value)
         
     }
+    
+    
     
     private func saveSlider(sender : Float){
         let context = CoreDataManager.shared.persistentContainer.viewContext
