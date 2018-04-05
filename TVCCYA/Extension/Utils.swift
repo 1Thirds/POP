@@ -16,6 +16,8 @@ extension UIColor {
     
     static let mainDarkGray = UIColor.rgb(red: 125, green: 125, blue: 125)
     
+    static let sliderDarkGray = UIColor.rgb(red: 175, green: 180, blue: 190)
+    
     static let mainLightGray = UIColor.rgb(red: 184, green: 189, blue: 198)
 
     static let mainBlue = UIColor.rgb(red: 11, green: 90, blue: 138)
@@ -28,13 +30,21 @@ extension UIColor {
 
     static let mainDarkGreen = UIColor.rgb(red: 32, green: 81, blue: 83)
     
+    static let sliderDarkGreen = UIColor.rgb(red: 117, green: 181, blue: 143)
+    
+    static let sliderGreen = UIColor.rgb(red: 121, green: 187, blue: 146)
+    
+    static let mainLightGreen = UIColor.rgb(red: 138, green: 196, blue: 163)
+    
     static let doneGreen = UIColor.rgb(red: 80, green: 154, blue: 111)
     
     static let mainDarkRed = UIColor.rgb(red: 134, green: 86, blue: 86)
     
     static let mainRed = UIColor.rgb(red: 153, green: 98, blue: 98)
     
-    static let mainLightGreen = UIColor.rgb(red: 138, green: 196, blue: 163)
+    static let sliderLightRed = UIColor.rgb(red: 168, green: 107, blue: 107)
+    
+    static let sliderDarkOrange = UIColor.rgb(red: 188, green: 106, blue: 76)
     
     static let mainOrange = UIColor.rgb(red: 198, green: 113, blue: 81)
     

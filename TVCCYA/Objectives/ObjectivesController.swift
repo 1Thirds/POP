@@ -26,6 +26,10 @@ class ObjectivesController: UITableViewController {
         return button
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +79,7 @@ class ObjectivesController: UITableViewController {
                 indexPathsToReload.append(indexPath)
             }
         }
-        
+
         self.tableView.reloadRows(at: indexPathsToReload, with: .right)
         self.tableView.reloadData()
         fetchObjectives()
