@@ -21,17 +21,11 @@ class DailyCell: UITableViewCell {
             
             guard let value = objective?.priority else { return }
             slider.setValue(00.0, animated: false)
-            if(value <= 10) {slider.tintColor = UIColor.mainLightGreen}
-            else if(value > 10 && value <= 20) {slider.tintColor = UIColor.sliderGreen}
-            else if(value > 20 && value <= 30) {slider.tintColor = UIColor.sliderDarkGreen}
-            else if(value > 30 && value <= 40) {slider.tintColor = UIColor.mainLightOrange}
-            else if(value > 40 && value <= 50) {slider.tintColor = UIColor.mainOrange}
-            else if(value > 50 && value <= 60) {slider.tintColor = UIColor.sliderDarkOrange}
-            else if(value > 60 && value <= 70) {slider.tintColor = UIColor.sliderLightRed}
-            else if(value > 70 && value <= 80) {slider.tintColor = UIColor.mainRed}
-            else if(value > 80 && value <= 90) {slider.tintColor = UIColor.mainDarkRed}
-            else if(value > 90 && value <= 100) {slider.tintColor = UIColor.mainDarkRed}
-            slider.setSliderValue(value: value, duration: 2.0)
+            if(value <= 30) {slider.tintColor = UIColor.mainLightGreen}
+            else if(value > 30 && value < 70) {slider.tintColor = UIColor.mainLightOrange}
+            else if(value >= 70 && value < 100) {slider.tintColor = UIColor.mainDarkRed}
+            else if(value == 100) {slider.tintColor = UIColor.mainBlue}
+            slider.setSliderValue(value: value, duration: 1.5)
         }
     }
     
@@ -39,7 +33,7 @@ class DailyCell: UITableViewCell {
     
     var objectivesController: ObjectivesController?
     
-    let objectiveLabel: UILabel = {
+    lazy var  objectiveLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white

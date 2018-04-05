@@ -28,7 +28,8 @@ class ObjectivesController: UITableViewController, GADBannerViewDelegate {
         return button
     }()
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.tableView.reloadData()
     }
     
@@ -37,6 +38,7 @@ class ObjectivesController: UITableViewController, GADBannerViewDelegate {
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.extraLightBlue
         
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -98,8 +100,8 @@ class ObjectivesController: UITableViewController, GADBannerViewDelegate {
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         self.objectives = CoreDataManager.shared.fetchObjectives()
         var indexPathsToReload = [IndexPath]()
-        
-        if(objective?.type == "Daily") {
+
+        if objective?.type == "Daily" {
             for (index, _) in objectives.enumerated() {
                 let indexPath = IndexPath(row: index, section: 0)
                 indexPathsToReload.append(indexPath)

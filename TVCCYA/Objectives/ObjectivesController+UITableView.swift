@@ -48,6 +48,10 @@ extension ObjectivesController {
         
         editAction.backgroundColor = UIColor.mainBlue
         
+        if indexPath.section == 0 {
+            return [deleteAction]
+        }
+        
         return [deleteAction, editAction]
     }
     
@@ -115,14 +119,19 @@ extension ObjectivesController {
         
         let rowCountLabel = UILabel()
         rowCountLabel.textAlignment = .center
-        
+
         let attributedText = NSMutableAttributedString(string: "[", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
-        
+
         attributedText.append(NSAttributedString(string: "\(allObjectives[section].objectives.count)", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: UIColor.mainBlue]))
-        
+
         attributedText.append(NSAttributedString(string: "]", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray]))
-        
+
         rowCountLabel.attributedText = attributedText
+
+        if allObjectives[section].objectives.count == 0 {
+            rowCountLabel.isHidden = true
+            self.tableView.reloadData()
+        }
         
         if section == 0 {
             label.text = "Daily"

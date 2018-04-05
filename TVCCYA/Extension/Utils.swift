@@ -130,3 +130,18 @@ extension UIImage {
     }
 }
 
+extension UISlider {
+    public func setSliderValue(value: Float, duration: Double) {
+        
+        UIView.animate(withDuration: duration, animations: { () -> Void in
+            self.setValue(self.value, animated: true)
+            
+        }) { (bol) -> Void in
+            UIView.animate(withDuration: duration, animations: { () -> Void in
+                self.setValue(value, animated: true)
+            }, completion: nil)
+        }
+        
+    }
+}
+
