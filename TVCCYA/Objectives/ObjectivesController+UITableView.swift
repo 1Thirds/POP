@@ -23,39 +23,32 @@ extension ObjectivesController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        var rowActions = [UITableViewRowAction]()
-        
-        if indexPath.section == 0 {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Done") { (_, indexPath) in
+            let objective = self.allObjectives[indexPath.section].objectives[indexPath.row]
             
-        } else {
-        
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Done") { (_, indexPath) in
-                let objective = self.allObjectives[indexPath.section].objectives[indexPath.row]
-                
-                // remove the task from our tableView
-                self.allObjectives[indexPath.section].objectives.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                
-                // delete the objective from core data
-                let context = CoreDataManager.shared.persistentContainer.viewContext
-                
-                context.delete(objective)
-                
-                do {
-                    try context.save()
-                } catch let saveErr {
-                    print("Failed to delete objective:", saveErr)
-                }
+            // remove the task from our tableView
+            self.allObjectives[indexPath.section].objectives.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // delete the objective from core data
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            
+            context.delete(objective)
+            
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to delete objective:", saveErr)
             }
-            
-            deleteAction.backgroundColor = UIColor.doneGreen
-            
-            let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
-            
-            editAction.backgroundColor = UIColor.mainBlue
-            rowActions = [deleteAction, editAction]
         }
-        return rowActions
+        
+        deleteAction.backgroundColor = UIColor.doneGreen
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
+        
+        editAction.backgroundColor = UIColor.mainBlue
+        
+        return [deleteAction, editAction]
     }
     
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
