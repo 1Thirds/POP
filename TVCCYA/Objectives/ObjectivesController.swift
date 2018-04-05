@@ -26,11 +26,17 @@ class ObjectivesController: UITableViewController {
         return button
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.extraLightBlue
         
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -68,14 +74,14 @@ class ObjectivesController: UITableViewController {
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         self.objectives = CoreDataManager.shared.fetchObjectives()
         var indexPathsToReload = [IndexPath]()
-        
-        if(objective?.type == "Daily") {
+
+        if objective?.type == "Daily" {
             for (index, _) in objectives.enumerated() {
                 let indexPath = IndexPath(row: index, section: 0)
                 indexPathsToReload.append(indexPath)
             }
         }
-        
+
         self.tableView.reloadRows(at: indexPathsToReload, with: .right)
         self.tableView.reloadData()
         fetchObjectives()

@@ -25,7 +25,7 @@ class DailyCell: UITableViewCell {
             else if(value > 30 && value < 70) {slider.tintColor = UIColor.mainLightOrange}
             else if(value >= 70 && value < 100) {slider.tintColor = UIColor.mainDarkRed}
             else if(value == 100) {slider.tintColor = UIColor.mainBlue}
-            slider.setSliderValue(value: value, duration: 2.0)
+            slider.setSliderValue(value: value, duration: 1.5)
         }
     }
     
@@ -33,7 +33,7 @@ class DailyCell: UITableViewCell {
     
     var objectivesController: ObjectivesController?
     
-    let objectiveLabel: UILabel = {
+    lazy var  objectiveLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white

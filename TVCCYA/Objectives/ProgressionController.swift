@@ -102,7 +102,7 @@ class ProgressionController: UIViewController {
     
     let enterProgressTextField: UITextField = {
         let tf = UITextField()
-        tf.attributedPlaceholder = NSAttributedString(string: "Enter Progress", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
+        tf.attributedPlaceholder = NSAttributedString(string: "Add Progress", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
         tf.textAlignment = .center
         tf.keyboardType = .numberPad
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
