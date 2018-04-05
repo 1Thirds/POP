@@ -8,9 +8,11 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
-class ObjectivesController: UITableViewController {
+class ObjectivesController: UITableViewController, GADBannerViewDelegate {
     
+    var bannerView: GADBannerView!
     var objectives = [Objective]()
     
 //    var allObjectives = [[Objective]]()
@@ -61,10 +63,34 @@ class ObjectivesController: UITableViewController {
         tableView.register(DailyCell.self, forCellReuseIdentifier: dailyCellId)
         
         fetchObjectives()
-        
-//        view.addSubview(addObjButton)
-//        addObjButton.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 12, paddingRight: 12, width: 75, height: 75)
-//        addObjButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.delegate = self
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
     }
     
     var objective: Objective?
