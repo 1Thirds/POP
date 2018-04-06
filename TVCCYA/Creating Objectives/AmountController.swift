@@ -29,7 +29,7 @@ class AmountController: UIViewController, UITextFieldDelegate {
     
     let amountTextField: UITextField = {
         let tf = UITextField()
-        tf.attributedPlaceholder = NSAttributedString(string: "#", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
+        tf.attributedPlaceholder = NSAttributedString(string: "Goal #", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor: UIColor.mainLightGray])
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         tf.keyboardType = .numberPad
         return tf
@@ -41,11 +41,12 @@ class AmountController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    let ofLabel: UILabel = {
+    let dashLabel: UILabel = {
         let label = UILabel()
         label.text = "-"
         label.textColor = UIColor.mainDarkGray
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
         return label
     }()
     
@@ -97,6 +98,30 @@ class AmountController: UIViewController, UITextFieldDelegate {
         return label
     }()
     
+    let invisibleDashLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }()
+    
+    let numberLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Number"
+        label.textColor = .mainLightGray
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
+    let ofLabel: UILabel = {
+        let label = UILabel()
+        label.text = "of"
+        label.textColor = .mainLightGray
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,18 +142,27 @@ class AmountController: UIViewController, UITextFieldDelegate {
         amountTextField.addSubview(amountLine)
         amountLine.anchor(top: nil, left: amountTextField.leftAnchor, bottom: amountTextField.bottomAnchor, right: amountTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 1)
         
-        backgroundView.addSubview(ofLabel)
-        ofLabel.anchor(top: amountTextField.topAnchor, left: amountTextField.rightAnchor, bottom: amountTextField.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 20, height: 0)
+        backgroundView.addSubview(dashLabel)
+        dashLabel.anchor(top: amountTextField.topAnchor, left: amountTextField.rightAnchor, bottom: amountTextField.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 20, height: 0)
+        
+        dashLabel.addSubview(invisibleDashLine)
+        invisibleDashLine.anchor(top: nil, left: dashLabel.leftAnchor, bottom: dashLabel.bottomAnchor, right: dashLabel.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 1)
         
         backgroundView.addSubview(unitTextField)
-//        unitTextField.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
-        unitTextField.anchor(top: ofLabel.topAnchor, left: ofLabel.rightAnchor, bottom: ofLabel.bottomAnchor, right: backgroundView.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        unitTextField.anchor(top: dashLabel.topAnchor, left: dashLabel.rightAnchor, bottom: dashLabel.bottomAnchor, right: backgroundView.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
         
         unitTextField.addSubview(line)
         line.anchor(top: nil, left: unitTextField.leftAnchor, bottom: unitTextField.bottomAnchor, right: unitTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 1)
 
         backgroundView.addSubview(exampleLabel)
         exampleLabel.anchor(top: line.bottomAnchor, left: line.leftAnchor, bottom: nil, right: line.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        backgroundView.addSubview(numberLabel)
+        numberLabel.anchor(top: amountLine.bottomAnchor, left: amountLine.leftAnchor, bottom: nil, right: amountLine.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        backgroundView.addSubview(ofLabel)
+        ofLabel.anchor(top: invisibleDashLine.bottomAnchor, left: invisibleDashLine.leftAnchor, bottom: nil, right: invisibleDashLine.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
         
         amountTextField.delegate = self
         unitTextField.delegate = self
