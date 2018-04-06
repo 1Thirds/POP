@@ -132,6 +132,17 @@ class ProgressionController: UIViewController {
         return button
     }()
     
+    let resetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Reset", for: .normal)
+        button.addTarget(self, action: #selector(handleResetProgress), for: .touchUpInside)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        //button.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
     func setProgress() {
         
         setupAttributedCurrentProgress()
@@ -240,7 +251,7 @@ class ProgressionController: UIViewController {
 //            gratsLabel.anchor(top: progressView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 40)
 //        }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Progress", style: .plain, target: self, action: #selector(handleResetProgress))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Progress", style: .plain, target: self, action: #selector(handleResetProgress))
     }
     
     var delegate: CreateObjectiveControllerDelegate?
@@ -292,6 +303,9 @@ class ProgressionController: UIViewController {
         
         view.addSubview(purposeLabel)
         purposeLabel.anchor(top: unitLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 32, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        
+        view.addSubview(resetButton)
+        resetButton.anchor(top: progressView.bottomAnchor, left: line.leftAnchor, bottom: nil, right: line.rightAnchor, paddingTop: 230, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 40)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
