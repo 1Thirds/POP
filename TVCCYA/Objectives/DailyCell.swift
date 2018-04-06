@@ -24,7 +24,7 @@ class DailyCell: UITableViewCell {
             if(value <= 30) {slider.tintColor = UIColor.mainLightGreen}
             else if(value > 30 && value < 70) {slider.tintColor = UIColor.mainLightOrange}
             else if(value >= 70 && value < 100) {slider.tintColor = UIColor.mainDarkRed}
-            else if(value == 100) {slider.tintColor = UIColor.mainBlue}
+            else if(value == 100) {slider.tintColor = UIColor.mainDarkRed}
             slider.setSliderValue(value: value, duration: 1.5)
         }
     }
@@ -49,16 +49,6 @@ class DailyCell: UITableViewCell {
         return iv
     }()
     
-//    @objc func handleTextInputChange() {
-//        let unitHasText = objTextField.text?.count ?? 0 > 0
-//        
-//        if unitHasText {
-//            self.objectivesController?.navRightDoneButtonShown()
-//        } else {
-//            self.objectivesController?.navRightNothing()
-//        }
-//    }
-    
     lazy var slider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0
@@ -69,31 +59,25 @@ class DailyCell: UITableViewCell {
         return slider
     }()
     
-    // create a new coreData object with just sliderValue and call it within createCompany()
-    @objc func sliderValueDidChange(_ sender:UISlider!) {
-        //print("Slider Value--\(sender.value)")
+    @objc func sliderValueDidChange(_ sender: UISlider!) {
         
-//        if(sender.value <= 15) {slider.tintColor = UIColor.mainLightGreen}
-//        else if(sender.value > 15 && sender.value <= 25) {slider.tintColor = UIColor.mainDarkGreen}
-//        else if(sender.value > 35 && sender.value <= 45) {slider.tintColor = UIColor.mainLightOrange}
-//        else if(sender.value > 55 && sender.value <= 70) {slider.tintColor = UIColor.mainOrange}
-//        else if(sender.value > 70 && sender.value <= 85) {slider.tintColor = UIColor.mainRed}
-//        else if(sender.value > 85 && sender.value <= 100) {slider.tintColor = UIColor.mainDarkRed}
-        
-        if(sender.value <= 10) {slider.tintColor = UIColor.mainLightGreen}
-        else if(sender.value > 10 && sender.value <= 20) {slider.tintColor = UIColor.sliderGreen}
-        else if(sender.value > 20 && sender.value <= 30) {slider.tintColor = UIColor.sliderDarkGreen}
-        else if(sender.value > 30 && sender.value <= 40) {slider.tintColor = UIColor.mainLightOrange}
-        else if(sender.value > 40 && sender.value <= 50) {slider.tintColor = UIColor.mainOrange}
-        else if(sender.value > 50 && sender.value <= 60) {slider.tintColor = UIColor.sliderDarkOrange}
-        else if(sender.value > 60 && sender.value <= 70) {slider.tintColor = UIColor.sliderLightRed}
-        else if(sender.value > 70 && sender.value <= 80) {slider.tintColor = UIColor.mainRed}
-        else if(sender.value > 80 && sender.value <= 90) {slider.tintColor = UIColor.mainDarkRed}
-        else if(sender.value > 90 && sender.value <= 100) {slider.tintColor = UIColor.mainDarkRed}
+        sliderColorChange(slider: slider)
         
         sender.setValue(sender.value, animated: true)
         saveSlider(sender: sender.value)
-        
+    }
+    
+    private func sliderColorChange(slider: UISlider) {
+        if(slider.value <= 10) {slider.tintColor = UIColor.mainLightGreen}
+        else if(slider.value > 10 && slider.value <= 20) {slider.tintColor = UIColor.sliderGreen}
+        else if(slider.value > 20 && slider.value <= 30) {slider.tintColor = UIColor.sliderDarkGreen}
+        else if(slider.value > 30 && slider.value <= 40) {slider.tintColor = UIColor.mainLightOrange}
+        else if(slider.value > 40 && slider.value <= 50) {slider.tintColor = UIColor.mainOrange}
+        else if(slider.value > 50 && slider.value <= 60) {slider.tintColor = UIColor.sliderDarkOrange}
+        else if(slider.value > 60 && slider.value <= 70) {slider.tintColor = UIColor.sliderLightRed}
+        else if(slider.value > 70 && slider.value <= 80) {slider.tintColor = UIColor.mainRed}
+        else if(slider.value > 80 && slider.value <= 90) {slider.tintColor = UIColor.mainDarkRed}
+        else if(slider.value > 90 && slider.value <= 100) {slider.tintColor = UIColor.mainDarkRed}
     }
     
     
