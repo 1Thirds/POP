@@ -1,0 +1,6 @@
+framework module Pods_TVCCYATests {
+  umbrella header "Pods-TVCCYATests-umbrella.h"
+
+  export *
+  module * { export * }
+}

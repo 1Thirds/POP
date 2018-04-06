@@ -68,7 +68,8 @@ class DailyCell: UITableViewCell {
         
         sliderColorChange(slider: slider)
         
-        sender.setValue(sender.value, animated: true)
+        //sender.setValue(sender.value, animated: true)
+        slider.setSliderValue(value: sender.value, duration: 1.5)
         saveSlider(sender: sender.value)
     }
     
